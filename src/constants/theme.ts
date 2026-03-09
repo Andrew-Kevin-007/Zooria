@@ -1,77 +1,53 @@
-import { Dimensions } from 'react-native';
+import {TextStyle} from 'react-native';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
-
-// ─── Colors ──────────────────────────────────────────────────────────────────
-
+// ─── COLORS ────────────────────────────────────────────────
 export const COLORS = {
-  // Brand
-  primary: '#FF6B35',      // Warm orange — energy, playfulness
-  primaryLight: '#FF8C5A',
-  primaryDark: '#E55A25',
-  secondary: '#2EC4B6',    // Teal — trust, calmness
-  secondaryLight: '#4DD8CC',
-  secondaryDark: '#1BA99D',
+  // Backgrounds (dark-first)
+  bgPrimary: '#0D0D0D',
+  bgSecondary: '#1A1A1A',
+  bgTertiary: '#242424',
+  bgGlass: 'rgba(255,255,255,0.07)',
+  bgGlassBorder: 'rgba(255,255,255,0.12)',
 
-  // Accent
-  accent: '#FFD166',       // Yellow — joy, optimism
-  accentLight: '#FFE08A',
+  // Brand Gradients (use as arrays with LinearGradient)
+  gradientPrimary: ['#39FF7E', '#00C9A7'] as const,
+  gradientAccent: ['#FF4D6D', '#FF8C42'] as const,
+  gradientPurple: ['#9B5DE5', '#6A0DAD'] as const,
+  gradientDark: ['#1A1A1A', '#0D0D0D'] as const,
+  gradientCard: [
+    'rgba(255,255,255,0.1)',
+    'rgba(255,255,255,0.03)',
+  ] as const,
 
-  // Neutrals
+  // Solids
+  neonGreen: '#39FF7E',
+  hotPink: '#FF4D6D',
+  purple: '#9B5DE5',
+  coral: '#FF8C42',
+  gold: '#FFD700',
   white: '#FFFFFF',
-  black: '#000000',
-  background: '#F8F9FC',
-  surface: '#FFFFFF',
-  surfaceAlt: '#F0F2F8',
+  offWhite: '#F0F0F0',
 
   // Text
-  textPrimary: '#1A1D2E',
-  textSecondary: '#6B7280',
-  textTertiary: '#9CA3AF',
-  textInverse: '#FFFFFF',
+  textPrimary: '#FFFFFF',
+  textSecondary: 'rgba(255,255,255,0.65)',
+  textMuted: 'rgba(255,255,255,0.35)',
+  textInverse: '#0D0D0D',
 
-  // Semantic
-  success: '#22C55E',
-  successLight: '#DCFCE7',
-  warning: '#F59E0B',
-  warningLight: '#FEF3C7',
-  error: '#EF4444',
-  errorLight: '#FEE2E2',
-  info: '#3B82F6',
-  infoLight: '#DBEAFE',
+  // Status
+  success: '#39FF7E',
+  error: '#FF4D6D',
+  warning: '#FFD700',
+  info: '#5B8DEF',
 
-  // Borders
-  border: '#E5E7EB',
-  borderLight: '#F3F4F6',
-  divider: '#E5E7EB',
+  // Glow shadows (use as shadowColor)
+  glowGreen: 'rgba(57, 255, 126, 0.4)',
+  glowPink: 'rgba(255, 77, 109, 0.4)',
+  glowPurple: 'rgba(155, 93, 229, 0.4)',
+} as const;
 
-  // Overlays
-  overlay: 'rgba(0, 0, 0, 0.5)',
-  overlayLight: 'rgba(0, 0, 0, 0.2)',
-
-  // Pet categories (used as tag colors)
-  dog: '#FF6B35',
-  cat: '#A855F7',
-  bird: '#22C55E',
-  fish: '#3B82F6',
-  rabbit: '#EC4899',
-  reptile: '#84CC16',
-
-  // Tab bar
-  tabActive: '#FF6B35',
-  tabInactive: '#9CA3AF',
-};
-
-// ─── Typography ──────────────────────────────────────────────────────────────
-
-export const FONTS = {
-  regular: 'System',
-  medium: 'System',
-  semiBold: 'System',
-  bold: 'System',
-};
-
-export const FONT_SIZES = {
+// ─── FONT SIZES ────────────────────────────────────────────
+export const FONT_SIZE = {
   xs: 10,
   sm: 12,
   base: 14,
@@ -82,24 +58,19 @@ export const FONT_SIZES = {
   '3xl': 28,
   '4xl': 32,
   '5xl': 40,
-};
+  '6xl': 52,
+} as const;
 
-export const LINE_HEIGHTS = {
-  tight: 1.2,
-  normal: 1.5,
-  relaxed: 1.75,
-};
+// ─── FONT WEIGHTS ──────────────────────────────────────────
+export const FONT_WEIGHT: Record<string, TextStyle['fontWeight']> = {
+  black: '900',
+  bold: '700',
+  semiBold: '600',
+  medium: '500',
+  regular: '400',
+} as const;
 
-export const FONT_WEIGHTS = {
-  regular: '400' as const,
-  medium: '500' as const,
-  semiBold: '600' as const,
-  bold: '700' as const,
-  extraBold: '800' as const,
-};
-
-// ─── Spacing ─────────────────────────────────────────────────────────────────
-
+// ─── SPACING ───────────────────────────────────────────────
 export const SPACING = {
   xs: 4,
   sm: 8,
@@ -108,96 +79,56 @@ export const SPACING = {
   lg: 20,
   xl: 24,
   '2xl': 32,
-  '3xl': 40,
-  '4xl': 48,
-  '5xl': 64,
-};
+  '3xl': 48,
+} as const;
 
-// ─── Border Radius ───────────────────────────────────────────────────────────
+// ─── BORDER RADIUS ─────────────────────────────────────────
+export const RADIUS = {
+  sm: 12,
+  md: 16,
+  lg: 20,
+  xl: 24,
+  '2xl': 32,
+  full: 999,
+} as const;
 
-export const BORDER_RADIUS = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 20,
-  '2xl': 24,
-  full: 9999,
-};
-
-// ─── Shadows ─────────────────────────────────────────────────────────────────
-
-export const SHADOWS = {
-  none: {},
-  sm: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
+// ─── SHADOWS (Glow Presets) ────────────────────────────────
+export const SHADOW = {
+  glowSm: {
+    shadowColor: COLORS.glowGreen,
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 1,
+    shadowRadius: 8,
+    elevation: 4,
   },
-  md: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-    elevation: 3,
-  },
-  lg: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
-    elevation: 6,
-  },
-  xl: {
-    shadowColor: '#FF6B35',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.2,
+  glowMd: {
+    shadowColor: COLORS.glowGreen,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 1,
     shadowRadius: 16,
-    elevation: 10,
+    elevation: 8,
   },
+  glowPink: {
+    shadowColor: COLORS.glowPink,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 1,
+    shadowRadius: 16,
+    elevation: 8,
+  },
+  glowPurple: {
+    shadowColor: COLORS.glowPurple,
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 1,
+    shadowRadius: 16,
+    elevation: 8,
+  },
+} as const;
+
+// ─── GLASSMORPHISM STYLE HELPER ────────────────────────────
+export const GLASS = {
+  backgroundColor: COLORS.bgGlass,
+  borderWidth: 1,
+  borderColor: COLORS.bgGlassBorder,
+  borderRadius: RADIUS.xl,
+  overflow: 'hidden' as const,
 };
-
-// ─── Screen Dimensions ───────────────────────────────────────────────────────
-
-export const SCREEN = {
-  width: SCREEN_WIDTH,
-  height: SCREEN_HEIGHT,
-};
-
-// ─── Z-Index ─────────────────────────────────────────────────────────────────
-
-export const Z_INDEX = {
-  base: 0,
-  card: 10,
-  dropdown: 100,
-  modal: 200,
-  toast: 300,
-};
-
-// ─── Animation ───────────────────────────────────────────────────────────────
-
-export const ANIMATION = {
-  fast: 150,
-  normal: 250,
-  slow: 400,
-};
-
-// ─── Default Export ───────────────────────────────────────────────────────────
-
-const theme = {
-  colors: COLORS,
-  fonts: FONTS,
-  fontSizes: FONT_SIZES,
-  fontWeights: FONT_WEIGHTS,
-  lineHeights: LINE_HEIGHTS,
-  spacing: SPACING,
-  borderRadius: BORDER_RADIUS,
-  shadows: SHADOWS,
-  screen: SCREEN,
-  zIndex: Z_INDEX,
-  animation: ANIMATION,
-};
-
-export default theme;
