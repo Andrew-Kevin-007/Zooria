@@ -1,0 +1,28 @@
+import { initializeApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🔥 Firebase Web Config
+// Replace these placeholder values with your Firebase project credentials.
+// Go to: console.firebase.google.com → Your Project → Project Settings → Web App
+// ─────────────────────────────────────────────────────────────────────────────
+
+const firebaseConfig = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_AUTH_DOMAIN',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_SENDER_ID',
+  appId: 'YOUR_APP_ID',
+};
+
+// Prevent duplicate app initialization (important for hot reload)
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+export default app;
