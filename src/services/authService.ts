@@ -70,7 +70,9 @@ export const authService = {
   /**
    * Get user profile from Firestore
    */
-  getUserProfile: async (uid: string): Promise<{ success: boolean; user?: User; error?: string }> => {
+  getUserProfile: async (
+    uid: string
+  ): Promise<{ success: boolean; user?: User; error?: string }> => {
     try {
       const snap = await getDoc(doc(db, 'users', uid));
       if (snap.exists()) {

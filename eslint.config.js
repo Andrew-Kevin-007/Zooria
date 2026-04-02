@@ -1,0 +1,26 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
+  extends: ['eslint:recommended', 'prettier'],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  rules: {
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+  },
+  ignorePatterns: [
+    'node_modules/',
+    'dist/',
+    '.expo/',
+    'ios/',
+    'android/',
+    '.idea/',
+    'build/',
+    'coverage/',
+  ],
+};

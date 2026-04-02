@@ -19,6 +19,18 @@ export const COLORS = {
     'rgba(255,255,255,0.03)',
   ] as const,
 
+  // Brand
+  primary: '#FF6B35', // Warm orange — energy, playfulness
+  primaryLight: '#FF8C5A',
+  primaryDark: '#E55A25',
+  secondary: '#2EC4B6', // Teal — trust, calmness
+  secondaryLight: '#4DD8CC',
+  secondaryDark: '#1BA99D',
+
+  // Accent
+  accent: '#FFD166', // Yellow — joy, optimism
+  accentLight: '#FFE08A',
+
   // Solids
   neonGreen: '#39FF7E',
   hotPink: '#FF4D6D',

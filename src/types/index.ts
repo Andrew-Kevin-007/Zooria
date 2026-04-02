@@ -52,19 +52,19 @@ export interface Address {
 
 export interface Pet {
   id: string;
+  userId: string;
   name: string;
   category: PetCategory;
   breed: string;
-  age: number; // months
-  price: number;
-  description: string;
-  images: string[];
-  sellerId: string;
-  shopId: string;
-  isAvailable: boolean;
+  age: number;
+  weight: number;
+  avatar?: string | number;
+  color: string;
+  microchipId?: string;
   vaccinated: boolean;
+  allergies?: string;
+  medicalHistory?: string;
   createdAt: Date | any;
-  updatedAt: Date | any;
 }
 
 // ─── Product ──────────────────────────────────────────────────────────────────
@@ -75,33 +75,32 @@ export interface Product {
   description: string;
   category: ProductCategory;
   price: number;
-  discountPrice?: number;
-  images: string[];
-  stock: number;
-  shopId: string;
-  sellerId: string;
   rating: number;
-  reviewCount: number;
+  reviews: number;
+  image: string;
+  sellerId: string;
+  sellerName: string;
+  inStock: boolean;
+  quantity: number;
   tags: string[];
   createdAt: Date | any;
-  updatedAt: Date | any;
 }
 
 // ─── Service ──────────────────────────────────────────────────────────────────
 
 export interface Service {
   id: string;
+  type: ServiceType;
   name: string;
   description: string;
-  type: ServiceType;
+  provider: string;
+  providerId: string;
   price: number;
-  duration: number; // minutes
-  shopId: string;
-  sellerId: string;
-  images: string[];
   rating: number;
-  reviewCount: number;
-  isAvailable: boolean;
+  reviews: number;
+  image: string;
+  duration: number;
+  availableSlots: string[];
   createdAt: Date | any;
 }
 
@@ -143,28 +142,13 @@ export interface CartItem {
 export interface Order {
   id: string;
   userId: string;
-  shopId: string;
-  items: OrderItem[];
-  totalAmount: number;
+  items: Array<{ product: Product; quantity: number }>;
+  totalPrice: number;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
-  paymentMethod: 'mock' | 'razorpay' | 'cod';
   deliveryAddress: Address;
   createdAt: Date | any;
   updatedAt: Date | any;
-  estimatedDelivery?: Date | any;
-  trackingLocation?: {
-    lat: number;
-    lng: number;
-  };
-}
-
-export interface OrderItem {
-  productId: string;
-  productName: string;
-  productImage: string;
-  quantity: number;
-  price: number;
 }
 
 // ─── Booking ──────────────────────────────────────────────────────────────────
