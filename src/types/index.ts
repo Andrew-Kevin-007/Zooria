@@ -79,6 +79,7 @@ export interface Product {
   reviews: number;
   image: string;
   sellerId: string;
+  shopId?: string;
   sellerName: string;
   inStock: boolean;
   quantity: number;

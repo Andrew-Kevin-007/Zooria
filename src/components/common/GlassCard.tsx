@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
+  StyleProp,
   ViewStyle,
   ViewProps,
 } from 'react-native';
@@ -14,11 +15,11 @@ interface GlassCardProps extends ViewProps {
   children: React.ReactNode;
   onPress?: () => void;
   glow?: GlowType;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 }
 
 const GLOW_MAP: Record<GlowType, ViewStyle> = {
-  green: SHADOW.glowMd,
+  green: SHADOW.glowGreen,
   pink: SHADOW.glowPink,
   purple: SHADOW.glowPurple,
 };
@@ -26,11 +27,11 @@ const GLOW_MAP: Record<GlowType, ViewStyle> = {
 const GlassCard: React.FC<GlassCardProps> = ({
   children,
   onPress,
-  glow,
+  glow = 'green',
   style,
   ...rest
 }) => {
-  const glowStyle = glow ? GLOW_MAP[glow] : {};
+  const glowStyle = GLOW_MAP[glow];
 
   const cardContent = (
     <View style={[styles.card, glowStyle, style]} {...rest}>
@@ -40,7 +41,7 @@ const GlassCard: React.FC<GlassCardProps> = ({
 
   if (onPress) {
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
         {cardContent}
       </TouchableOpacity>
     );

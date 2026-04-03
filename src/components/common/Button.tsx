@@ -8,7 +8,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 import {COLORS, FONT_SIZE, FONT_WEIGHT, RADIUS, SHADOW, SPACING} from '../../constants/theme';
 
 type ButtonVariant = 'primary' | 'accent' | 'glass' | 'ghost';
@@ -131,14 +131,16 @@ const styles = StyleSheet.create({
   },
   glass: {
     backgroundColor: COLORS.bgGlass,
-    borderWidth: 1,
-    borderColor: COLORS.bgGlassBorder,
+    borderWidth: 1.5,
+    borderColor: COLORS.primary,
   },
   ghost: {
     backgroundColor: 'transparent',
+    borderWidth: 1.5,
+    borderColor: COLORS.primary,
   },
   disabled: {
-    opacity: 0.2,
+    opacity: 0.5,
   },
   label: {
     fontWeight: FONT_WEIGHT.bold,

@@ -33,7 +33,7 @@ const cartSlice = createSlice({
           productId: product.id,
           product,
           quantity,
-          shopId: product.shopId,
+          shopId: product.shopId ?? product.sellerId,
         });
       }
       Object.assign(state, recalculate(state.items));

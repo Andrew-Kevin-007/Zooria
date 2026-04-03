@@ -8,7 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 import Avatar from '../../components/common/Avatar';
 import GlassCard from '../../components/common/GlassCard';
 import Badge from '../../components/common/Badge';

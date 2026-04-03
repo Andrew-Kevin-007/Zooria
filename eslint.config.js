@@ -1,26 +1,49 @@
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    node: true,
+const tsParser = require('@typescript-eslint/parser');
+const tsPlugin = require('@typescript-eslint/eslint-plugin');
+const prettierConfig = require('eslint-config-prettier');
+
+module.exports = [
+  {
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      '.expo/**',
+      'ios/**',
+      'android/**',
+      '.idea/**',
+      'build/**',
+      'coverage/**',
+    ],
   },
-  extends: ['eslint:recommended', 'prettier'],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {jsx: true},
+      },
+    },
+    rules: {
+      'no-console': ['warn', {allow: ['warn', 'error']}],
+      'no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
+    },
   },
-  rules: {
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
-    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+  {
+    files: ['**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaFeatures: {jsx: true},
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+    },
+    rules: {
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
+    },
   },
-  ignorePatterns: [
-    'node_modules/',
-    'dist/',
-    '.expo/',
-    'ios/',
-    'android/',
-    '.idea/',
-    'build/',
-    'coverage/',
-  ],
-};
+  prettierConfig,
+];

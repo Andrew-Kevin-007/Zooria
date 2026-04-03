@@ -9,7 +9,8 @@ import {
   TextInput,
 } from 'react-native';
 import { Text } from 'react-native';
-import { COLORS } from '../../constants/theme';
+import { LinearGradient } from 'expo-linear-gradient';
+import { COLORS, SHADOW, SPACING, RADIUS, FONT_SIZE, FONT_WEIGHT } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Product, ProductCategory } from '../../types';
 
@@ -110,23 +111,29 @@ export function ExploreScreen({ navigation }: ExploreScreenProps) {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Shop & Explore</Text>
-      </View>
+      {/* Header with Gradient */}
+      <LinearGradient
+        colors={['rgba(255, 107, 53, 0.12)', 'rgba(0, 217, 255, 0.05)']}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Explore & Shop</Text>
+          <Text style={styles.headerSubtitle}>Find amazing products for your pet</Text>
+        </View>
+      </LinearGradient>
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search products..."
-          placeholderTextColor={COLORS.textTertiary}
-          value={searchQuery}
-          onChangeText={handleSearch}
-        />
-        <TouchableOpacity style={styles.filterButton}>
-          <Text style={styles.filterIcon}>🔍</Text>
-        </TouchableOpacity>
+        <View style={[styles.searchWrapper, SHADOW.sm]}>
+          <Text style={styles.searchIcon}>🔍</Text>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search products..."
+            placeholderTextColor={COLORS.textMuted}
+            value={searchQuery}
+            onChangeText={handleSearch}
+          />
+        </View>
       </View>
 
       {/* Categories */}
@@ -207,133 +214,143 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   header: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
+    paddingHorizontal: SPACING.xl,
+    paddingVertical: SPACING.xl,
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: FONT_SIZE['4xl'],
+    fontWeight: FONT_WEIGHT.black,
     color: COLORS.textPrimary,
+    letterSpacing: -0.5,
+  },
+  headerSubtitle: {
+    fontSize: FONT_SIZE.base,
+    color: COLORS.textSecondary,
+    fontWeight: FONT_WEIGHT.medium,
+    marginTop: SPACING.xs,
   },
   searchContainer: {
+    paddingHorizontal: SPACING.xl,
+    marginBottom: SPACING.lg,
+    marginTop: -SPACING.md,
+  },
+  searchWrapper: {
     flexDirection: 'row',
-    paddingHorizontal: 16,
-    marginBottom: 12,
     alignItems: 'center',
-    gap: 8,
+    backgroundColor: COLORS.surface,
+    borderRadius: RADIUS.lg,
+    paddingHorizontal: SPACING.base,
+    borderWidth: 1,
+    borderColor: COLORS.bgGlassBorder,
+  },
+  searchIcon: {
+    fontSize: FONT_SIZE.xl,
+    marginRight: SPACING.sm,
   },
   searchInput: {
     flex: 1,
-    backgroundColor: COLORS.surface,
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    fontSize: 14,
+    paddingHorizontal: SPACING.base,
+    paddingVertical: SPACING.md,
+    fontSize: FONT_SIZE.base,
     color: COLORS.textPrimary,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-  },
-  filterButton: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 8,
-    padding: 10,
-  },
-  filterIcon: {
-    fontSize: 18,
+    fontWeight: FONT_WEIGHT.medium,
   },
   categoriesScroll: {
-    paddingHorizontal: 16,
-    marginBottom: 12,
-    maxHeight: 50,
+    paddingHorizontal: SPACING.xl,
+    marginBottom: SPACING.lg,
+    maxHeight: 60,
   },
   categoryChip: {
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    borderRadius: 20,
-    backgroundColor: COLORS.surface,
-    marginRight: 8,
-    borderWidth: 1,
-    borderColor: COLORS.border,
+    paddingHorizontal: SPACING.lg,
+    paddingVertical: SPACING.sm,
+    borderRadius: RADIUS.full,
+    backgroundColor: COLORS.bgGlass,
+    marginRight: SPACING.md,
+    borderWidth: 1.5,
+    borderColor: COLORS.bgGlassBorder,
   },
   categoryChipActive: {
     backgroundColor: COLORS.primary,
     borderColor: COLORS.primary,
   },
   categoryText: {
-    fontSize: 13,
-    fontWeight: '600',
+    fontSize: FONT_SIZE.sm,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textSecondary,
   },
   categoryTextActive: {
-    color: COLORS.white,
+    color: COLORS.textInverse,
   },
   productList: {
-    paddingHorizontal: 8,
-    paddingBottom: 20,
+    paddingHorizontal: SPACING.base,
+    paddingBottom: SPACING['2xl'],
   },
   columnWrapper: {
     justifyContent: 'space-between',
-    paddingHorizontal: 8,
-    marginBottom: 12,
+    paddingHorizontal: SPACING.base,
+    marginBottom: SPACING.md,
   },
   productCard: {
     width: '48%',
-    backgroundColor: COLORS.surface,
-    borderRadius: 12,
+    backgroundColor: COLORS.bgGlass,
+    borderRadius: RADIUS.xl,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: COLORS.bgGlassBorder,
+    ...SHADOW.md,
   },
   productImageContainer: {
     width: '100%',
-    height: 120,
-    backgroundColor: COLORS.surfaceAlt,
+    height: 140,
+    backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },
   productImageText: {
-    fontSize: 40,
+    fontSize: 48,
   },
   productInfo: {
-    padding: 10,
+    padding: SPACING.base,
   },
   productName: {
-    fontSize: 13,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.base,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textPrimary,
-    marginBottom: 4,
+    marginBottom: SPACING.xs,
   },
   productDescription: {
-    fontSize: 11,
+    fontSize: FONT_SIZE.xs,
     color: COLORS.textSecondary,
-    marginBottom: 6,
+    marginBottom: SPACING.md,
+    fontWeight: FONT_WEIGHT.medium,
   },
   productMeta: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: SPACING.md,
   },
   price: {
-    fontSize: 14,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.base,
+    fontWeight: FONT_WEIGHT.black,
     color: COLORS.primary,
   },
   rating: {
-    fontSize: 11,
+    fontSize: FONT_SIZE.xs,
     color: COLORS.textSecondary,
+    fontWeight: FONT_WEIGHT.medium,
   },
   addButton: {
     backgroundColor: COLORS.primary,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
+    paddingHorizontal: SPACING.base,
+    paddingVertical: SPACING.sm,
+    borderRadius: RADIUS.md,
     alignItems: 'center',
   },
   addButtonText: {
-    color: COLORS.white,
-    fontSize: 16,
-    fontWeight: '700',
+    color: COLORS.textInverse,
+    fontSize: FONT_SIZE.base,
+    fontWeight: FONT_WEIGHT.bold,
   },
   emptyContainer: {
     flex: 1,
@@ -343,18 +360,19 @@ const styles = StyleSheet.create({
   },
   emptyIcon: {
     fontSize: 64,
-    marginBottom: 12,
+    marginBottom: SPACING.base,
   },
   emptyText: {
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.xl,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textPrimary,
-    marginBottom: 4,
+    marginBottom: SPACING.sm,
   },
   emptySubtext: {
-    fontSize: 14,
+    fontSize: FONT_SIZE.base,
     color: COLORS.textSecondary,
     textAlign: 'center',
-    paddingHorizontal: 32,
+    paddingHorizontal: SPACING['2xl'],
+    fontWeight: FONT_WEIGHT.medium,
   },
 });

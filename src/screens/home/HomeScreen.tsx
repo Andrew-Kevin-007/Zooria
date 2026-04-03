@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import { Text } from 'react-native';
 import { Image } from 'expo-image';
-import { COLORS } from '../../constants/theme';
+import { LinearGradient } from 'expo-linear-gradient';
+import { COLORS, SHADOW, SPACING, RADIUS, FONT_SIZE, FONT_WEIGHT } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Product, Service, Pet } from '../../types';
 
@@ -65,11 +66,17 @@ export function HomeScreen() {
       style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.greeting}>Welcome to Zooria! 🐾</Text>
-        <Text style={styles.subtitle}>Your pet's one-stop destination</Text>
-      </View>
+      {/* Header with Gradient */}
+      <LinearGradient
+        colors={['rgba(0, 217, 255, 0.1)', 'rgba(0, 153, 204, 0.05)']}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}
+        style={styles.headerGradient}>
+        <View style={styles.header}>
+          <Text style={styles.greeting}>Welcome back! 👋</Text>
+          <Text style={styles.subtitle}>Your pet's one-stop destination</Text>
+        </View>
+      </LinearGradient>
 
       {/* My Pets Section */}
       {pets.length > 0 && (
@@ -216,224 +223,257 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: COLORS.background,
   },
+  headerGradient: {
+    paddingBottom: SPACING.base,
+  },
   header: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 8,
+    paddingHorizontal: SPACING.xl,
+    paddingTop: SPACING.xl + 8,
+    paddingBottom: SPACING.base,
   },
   greeting: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: FONT_SIZE['4xl'],
+    fontWeight: FONT_WEIGHT.black,
     color: COLORS.textPrimary,
-    marginBottom: 4,
+    marginBottom: SPACING.sm,
+    letterSpacing: -0.5,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: FONT_SIZE.base,
     color: COLORS.textSecondary,
+    fontWeight: FONT_WEIGHT.medium,
   },
   section: {
-    paddingVertical: 16,
+    paddingVertical: SPACING.xl,
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    marginBottom: 12,
+    paddingHorizontal: SPACING.xl,
+    marginBottom: SPACING.lg,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.xl,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textPrimary,
+    letterSpacing: -0.3,
   },
   seeAll: {
-    fontSize: 14,
+    fontSize: FONT_SIZE.sm,
     color: COLORS.primary,
-    fontWeight: '600',
+    fontWeight: FONT_WEIGHT.bold,
   },
   // Pet Cards
   petCard: {
-    marginLeft: 16,
-    marginBottom: 12,
-    width: 120,
+    marginLeft: SPACING.xl,
+    marginBottom: SPACING.lg,
+    width: 140,
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
-    borderRadius: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 8,
+    backgroundColor: COLORS.bgGlass,
+    borderWidth: 1,
+    borderColor: COLORS.bgGlassBorder,
+    borderRadius: RADIUS.xl,
+    paddingVertical: SPACING.lg,
+    paddingHorizontal: SPACING.base,
+    ...SHADOW.md,
   },
   petImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: COLORS.primaryLight,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: SPACING.md,
     overflow: 'hidden',
+    ...SHADOW.glowSm,
   },
   petImageAsset: {
     width: '100%',
     height: '100%',
   },
   petImageText: {
-    fontSize: 40,
+    fontSize: 48,
   },
   petName: {
-    fontSize: 14,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.md,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textPrimary,
-    marginBottom: 2,
+    marginBottom: SPACING.xs,
   },
   petBreed: {
-    fontSize: 12,
+    fontSize: FONT_SIZE.sm,
     color: COLORS.textSecondary,
     textAlign: 'center',
+    fontWeight: FONT_WEIGHT.medium,
   },
   addPet: {
-    marginRight: 16,
-    backgroundColor: COLORS.primaryLight,
+    marginRight: SPACING.xl,
+    backgroundColor: COLORS.primary,
     justifyContent: 'center',
   },
   addPetText: {
-    fontSize: 14,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.base,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.white,
   },
   // Banner
   bannerSection: {
-    paddingHorizontal: 16,
+    paddingHorizontal: SPACING.xl,
   },
   banner: {
-    borderRadius: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 16,
+    borderRadius: RADIUS.xl,
+    paddingVertical: SPACING['2xl'],
+    paddingHorizontal: SPACING.xl,
+    ...SHADOW.lg,
   },
   bannerText: {
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: FONT_SIZE['2xl'],
+    fontWeight: FONT_WEIGHT.black,
     color: COLORS.white,
-    marginBottom: 4,
+    marginBottom: SPACING.sm,
+    letterSpacing: -0.3,
   },
   bannerSubtext: {
-    fontSize: 14,
+    fontSize: FONT_SIZE.base,
     color: COLORS.white,
-    opacity: 0.9,
+    opacity: 0.95,
+    fontWeight: FONT_WEIGHT.semiBold,
   },
   // Product Cards
   productCard: {
-    marginLeft: 16,
-    marginBottom: 12,
-    width: 140,
-    backgroundColor: COLORS.surface,
-    borderRadius: 12,
-    padding: 12,
+    marginLeft: SPACING.xl,
+    marginBottom: SPACING.lg,
+    width: 160,
+    backgroundColor: COLORS.bgGlass,
+    borderWidth: 1,
+    borderColor: COLORS.bgGlassBorder,
+    borderRadius: RADIUS.xl,
+    overflow: 'hidden',
+    ...SHADOW.md,
   },
   productImage: {
     width: '100%',
-    height: 100,
-    backgroundColor: COLORS.surfaceAlt,
-    borderRadius: 8,
+    height: 120,
+    backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 0,
   },
   productImageText: {
-    fontSize: 40,
+    fontSize: 48,
   },
   productName: {
-    fontSize: 13,
-    fontWeight: '600',
+    fontSize: FONT_SIZE.base,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textPrimary,
-    marginBottom: 6,
+    marginBottom: SPACING.sm,
+    paddingHorizontal: SPACING.base,
+    paddingTop: SPACING.base,
   },
   price: {
-    fontSize: 16,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.lg,
+    fontWeight: FONT_WEIGHT.black,
     color: COLORS.primary,
-    marginBottom: 6,
+    marginBottom: SPACING.sm,
+    paddingHorizontal: SPACING.base,
   },
   ratingContainer: {
-    marginTop: 4,
+    marginTop: SPACING.xs,
+    paddingHorizontal: SPACING.base,
+    paddingBottom: SPACING.base,
   },
   rating: {
-    fontSize: 12,
+    fontSize: FONT_SIZE.sm,
     color: COLORS.textSecondary,
+    fontWeight: FONT_WEIGHT.medium,
   },
   // Service Cards
   serviceCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: COLORS.surface,
-    borderRadius: 12,
-    padding: 12,
-    marginHorizontal: 16,
-    marginBottom: 12,
+    backgroundColor: COLORS.bgGlass,
+    borderWidth: 1,
+    borderColor: COLORS.bgGlassBorder,
+    borderRadius: RADIUS.xl,
+    paddingHorizontal: SPACING.base,
+    paddingVertical: SPACING.base,
+    marginHorizontal: SPACING.xl,
+    marginBottom: SPACING.md,
+    ...SHADOW.md,
   },
   serviceIcon: {
-    width: 60,
-    height: 60,
-    borderRadius: 12,
-    backgroundColor: COLORS.primaryLight,
+    width: 70,
+    height: 70,
+    borderRadius: RADIUS.lg,
+    backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 12,
+    marginRight: SPACING.base,
+    ...SHADOW.glowSm,
   },
   serviceIconText: {
-    fontSize: 28,
+    fontSize: 32,
   },
   serviceInfo: {
     flex: 1,
   },
   serviceName: {
-    fontSize: 14,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.md,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textPrimary,
-    marginBottom: 2,
+    marginBottom: SPACING.xs,
   },
   serviceProvider: {
-    fontSize: 12,
+    fontSize: FONT_SIZE.sm,
     color: COLORS.textSecondary,
+    fontWeight: FONT_WEIGHT.medium,
   },
   serviceRight: {
     alignItems: 'flex-end',
   },
   servicePrice: {
-    fontSize: 14,
-    fontWeight: '700',
+    fontSize: FONT_SIZE.md,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.primary,
-    marginBottom: 2,
+    marginBottom: SPACING.xs,
   },
   serviceRating: {
-    fontSize: 12,
+    fontSize: FONT_SIZE.sm,
     color: COLORS.textSecondary,
+    fontWeight: FONT_WEIGHT.medium,
   },
   // Actions Grid
   actionsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    paddingHorizontal: 16,
+    paddingHorizontal: SPACING.xl,
     justifyContent: 'space-between',
   },
   actionButton: {
     width: '48%',
-    aspectRatio: 1.2,
-    backgroundColor: COLORS.surface,
-    borderRadius: 12,
+    aspectRatio: 1.3,
+    backgroundColor: COLORS.bgGlass,
+    borderWidth: 1,
+    borderColor: COLORS.bgGlassBorder,
+    borderRadius: RADIUS.xl,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: SPACING.md,
+    ...SHADOW.md,
   },
   actionIcon: {
-    fontSize: 32,
-    marginBottom: 8,
+    fontSize: 36,
+    marginBottom: SPACING.sm,
   },
   actionLabel: {
-    fontSize: 12,
-    fontWeight: '600',
+    fontSize: FONT_SIZE.sm,
+    fontWeight: FONT_WEIGHT.bold,
     color: COLORS.textPrimary,
+    textTransform: 'capitalize',
   },
   spacing: {
-    height: 20,
+    height: SPACING['2xl'],
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, ViewStyle} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 import {COLORS, FONT_SIZE, FONT_WEIGHT, SPACING} from '../../constants/theme';
 
 type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
