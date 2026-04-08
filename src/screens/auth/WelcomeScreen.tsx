@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {View, Text, StyleSheet, Animated, Dimensions} from 'react-native';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Button from '../../components/common/Button';
 import {COLORS, FONT_SIZE, FONT_WEIGHT, RADIUS, SPACING} from '../../constants/theme';
 
@@ -10,10 +11,10 @@ interface WelcomeScreenProps {
 }
 
 const FEATURES = [
-  {emoji: '🐾', label: 'adopt'},
-  {emoji: '🛒', label: 'shop'},
-  {emoji: '✂️', label: 'services'},
-  {emoji: '🚗', label: 'taxi'},
+  {icon: 'paw-outline', label: 'adopt'},
+  {icon: 'cart-outline', label: 'shop'},
+  {icon: 'content-cut', label: 'services'},
+  {icon: 'car-outline', label: 'taxi'},
 ];
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = ({navigation}) => {
@@ -47,7 +48,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({navigation}) => {
 
       {/* Logo area */}
       <View style={styles.logoArea}>
-        <Text style={styles.pawEmoji}>🐾</Text>
+        <MaterialCommunityIcons style={styles.pawEmoji} name="paw" size={64} color={COLORS.neonGreen} />
         <View style={styles.nameRow}>
           <Text style={styles.nameWhite}>zoor</Text>
           <Text style={styles.nameGreen}>ia</Text>
@@ -63,16 +64,17 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({navigation}) => {
             opacity,
           },
         ]}>
-        <Text style={styles.welcomeText}>welcome to zooria 🐾</Text>
+        <Text style={styles.welcomeText}>welcome to zooria</Text>
         <Text style={styles.subtext}>the pet app that actually slaps</Text>
 
         {/* Feature pills */}
         <View style={styles.pillsRow}>
           {FEATURES.map(f => (
             <View key={f.label} style={styles.pill}>
-              <Text style={styles.pillText}>
-                {f.emoji} {f.label}
-              </Text>
+              <View style={styles.pillInner}>
+                <MaterialCommunityIcons name={f.icon as any} size={14} color={COLORS.textPrimary} />
+                <Text style={styles.pillText}>{f.label}</Text>
+              </View>
             </View>
           ))}
         </View>
@@ -193,6 +195,11 @@ const styles = StyleSheet.create({
     borderRadius: RADIUS.full,
     paddingHorizontal: SPACING.base,
     paddingVertical: SPACING.sm,
+  },
+  pillInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
   },
   pillText: {
     color: COLORS.textPrimary,

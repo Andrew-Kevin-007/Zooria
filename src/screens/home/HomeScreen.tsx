@@ -9,21 +9,30 @@ import {
 import { Text } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, SHADOW, SPACING, RADIUS, FONT_SIZE, FONT_WEIGHT } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Product, Service, Pet } from '../../types';
 
-const PET_CATEGORY_ICON: Record<Pet['category'], string> = {
-  dog: '🐶',
-  cat: '🐱',
-  bird: '🐦',
-  fish: '🐠',
-  rabbit: '🐰',
-  reptile: '🦎',
-  other: '🐾',
+const PET_CATEGORY_ICON: Record<Pet['category'], keyof typeof MaterialCommunityIcons.glyphMap> = {
+  dog: 'dog',
+  cat: 'cat',
+  bird: 'bird',
+  fish: 'fish',
+  rabbit: 'rabbit',
+  reptile: 'snake',
+  other: 'paw',
 };
 
-const getPetCategoryIcon = (category: Pet['category']) => PET_CATEGORY_ICON[category] ?? '🐾';
+const getPetCategoryIcon = (category: Pet['category']) => PET_CATEGORY_ICON[category] ?? 'paw';
+
+const getServiceIcon = (type: Service['type']): keyof typeof MaterialCommunityIcons.glyphMap => {
+  if (type === 'grooming') return 'content-cut';
+  if (type === 'vet') return 'stethoscope';
+  if (type === 'training') return 'school-outline';
+  if (type === 'boarding') return 'home-outline';
+  return 'walk';
+};
 
 export function HomeScreen() {
   const [pets, setPets] = useState<Pet[]>([]);
@@ -73,7 +82,7 @@ export function HomeScreen() {
         end={{x: 1, y: 1}}
         style={styles.headerGradient}>
         <View style={styles.header}>
-          <Text style={styles.greeting}>Welcome back! 👋</Text>
+          <Text style={styles.greeting}>Welcome back!</Text>
           <Text style={styles.subtitle}>Your pet's one-stop destination</Text>
         </View>
       </LinearGradient>
@@ -97,7 +106,11 @@ export function HomeScreen() {
                   {pet.avatar ? (
                     <Image source={pet.avatar} style={styles.petImageAsset} contentFit="cover" />
                   ) : (
-                    <Text style={styles.petImageText}>{getPetCategoryIcon(pet.category)}</Text>
+                    <MaterialCommunityIcons
+                      name={getPetCategoryIcon(pet.category)}
+                      size={44}
+                      color={COLORS.white}
+                    />
                   )}
                 </View>
                 <Text style={styles.petName}>{pet.name}</Text>
@@ -134,12 +147,15 @@ export function HomeScreen() {
               style={styles.productCard}
             >
               <View style={styles.productImage}>
-                <Text style={styles.productImageText}>📦</Text>
+                <MaterialCommunityIcons name="package-variant-closed" size={44} color={COLORS.white} />
               </View>
               <Text style={styles.productName}>{product.name}</Text>
               <Text style={styles.price}>${product.price.toFixed(2)}</Text>
               <View style={styles.ratingContainer}>
-                <Text style={styles.rating}>⭐ {product.rating}</Text>
+                <View style={styles.ratingRow}>
+                  <MaterialCommunityIcons name="star" size={14} color={COLORS.warning} />
+                  <Text style={styles.rating}>{product.rating}</Text>
+                </View>
               </View>
             </TouchableOpacity>
           ))}
@@ -160,17 +176,7 @@ export function HomeScreen() {
             style={styles.serviceCard}
           >
             <View style={styles.serviceIcon}>
-              <Text style={styles.serviceIconText}>
-                {service.type === 'grooming'
-                  ? '✂️'
-                  : service.type === 'vet'
-                    ? '🏥'
-                    : service.type === 'training'
-                      ? '🎓'
-                      : service.type === 'boarding'
-                        ? '🏠'
-                        : '🚶'}
-              </Text>
+              <MaterialCommunityIcons name={getServiceIcon(service.type)} size={30} color={COLORS.white} />
             </View>
             <View style={styles.serviceInfo}>
               <Text style={styles.serviceName}>{service.name}</Text>
@@ -178,7 +184,10 @@ export function HomeScreen() {
             </View>
             <View style={styles.serviceRight}>
               <Text style={styles.servicePrice}>${service.price}</Text>
-              <Text style={styles.serviceRating}>⭐ {service.rating}</Text>
+              <View style={styles.ratingRow}>
+                <MaterialCommunityIcons name="star" size={14} color={COLORS.warning} />
+                <Text style={styles.serviceRating}>{service.rating}</Text>
+              </View>
             </View>
           </TouchableOpacity>
         ))}
@@ -189,19 +198,19 @@ export function HomeScreen() {
         <Text style={styles.sectionTitle}>Quick Actions</Text>
         <View style={styles.actionsGrid}>
           <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionIcon}>🛒</Text>
+            <MaterialCommunityIcons style={styles.actionIcon} name="cart-outline" size={36} color={COLORS.primary} />
             <Text style={styles.actionLabel}>Shop</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionIcon}>🛁</Text>
+            <MaterialCommunityIcons style={styles.actionIcon} name="shower" size={36} color={COLORS.primary} />
             <Text style={styles.actionLabel}>Services</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionIcon}>🐕</Text>
+            <MaterialCommunityIcons style={styles.actionIcon} name="dog" size={36} color={COLORS.primary} />
             <Text style={styles.actionLabel}>Pets</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionIcon}>📦</Text>
+            <MaterialCommunityIcons style={styles.actionIcon} name="package-variant-closed" size={36} color={COLORS.primary} />
             <Text style={styles.actionLabel}>Orders</Text>
           </TouchableOpacity>
         </View>
@@ -389,6 +398,11 @@ const styles = StyleSheet.create({
     color: COLORS.textSecondary,
     fontWeight: FONT_WEIGHT.medium,
   },
+  ratingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
+  },
   // Service Cards
   serviceCard: {
     flexDirection: 'row',
@@ -412,9 +426,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: SPACING.base,
     ...SHADOW.glowSm,
-  },
-  serviceIconText: {
-    fontSize: 32,
   },
   serviceInfo: {
     flex: 1,

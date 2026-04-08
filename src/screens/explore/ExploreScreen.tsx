@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, SHADOW, SPACING, RADIUS, FONT_SIZE, FONT_WEIGHT } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Product, ProductCategory } from '../../types';
@@ -81,7 +82,7 @@ export function ExploreScreen({ navigation }: ExploreScreenProps) {
   const renderProductCard = ({ item }: { item: Product }) => (
     <TouchableOpacity style={styles.productCard}>
       <View style={styles.productImageContainer}>
-        <Text style={styles.productImageText}>📦</Text>
+        <MaterialCommunityIcons name="package-variant-closed" size={44} color={COLORS.white} />
       </View>
       <View style={styles.productInfo}>
         <Text style={styles.productName} numberOfLines={2}>
@@ -92,7 +93,10 @@ export function ExploreScreen({ navigation }: ExploreScreenProps) {
         </Text>
         <View style={styles.productMeta}>
           <Text style={styles.price}>${item.price.toFixed(2)}</Text>
-          <Text style={styles.rating}>⭐ {item.rating}</Text>
+          <View style={styles.ratingRow}>
+            <MaterialCommunityIcons name="star" size={14} color={COLORS.warning} />
+            <Text style={styles.rating}>{item.rating}</Text>
+          </View>
         </View>
       </View>
       <TouchableOpacity style={styles.addButton}>
@@ -125,7 +129,7 @@ export function ExploreScreen({ navigation }: ExploreScreenProps) {
       {/* Search Bar */}
       <View style={styles.searchContainer}>
         <View style={[styles.searchWrapper, SHADOW.sm]}>
-          <Text style={styles.searchIcon}>🔍</Text>
+          <MaterialCommunityIcons name="magnify" size={22} color={COLORS.textSecondary} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search products..."
@@ -182,7 +186,7 @@ export function ExploreScreen({ navigation }: ExploreScreenProps) {
       {/* Products List */}
       {filteredProducts.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyIcon}>🔍</Text>
+          <MaterialCommunityIcons style={styles.emptyIcon} name="magnify" size={64} color={COLORS.textSecondary} />
           <Text style={styles.emptyText}>No products found</Text>
           <Text style={styles.emptySubtext}>
             Try adjusting your filters or search query
@@ -242,10 +246,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: SPACING.base,
     borderWidth: 1,
     borderColor: COLORS.bgGlassBorder,
-  },
-  searchIcon: {
-    fontSize: FONT_SIZE.xl,
-    marginRight: SPACING.sm,
   },
   searchInput: {
     flex: 1,
@@ -339,6 +339,11 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.xs,
     color: COLORS.textSecondary,
     fontWeight: FONT_WEIGHT.medium,
+  },
+  ratingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.xs,
   },
   addButton: {
     backgroundColor: COLORS.primary,

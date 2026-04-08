@@ -10,6 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import { Text } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Service, ServiceType } from '../../types';
@@ -53,12 +54,12 @@ export function ServicesScreen() {
   };
 
   const getServiceIcon = (type: ServiceType) => {
-    const icons: Record<ServiceType, string> = {
-      grooming: '✂️',
-      vet: '🏥',
-      training: '🎓',
-      boarding: '🏠',
-      walking: '🚶',
+    const icons: Record<ServiceType, keyof typeof MaterialCommunityIcons.glyphMap> = {
+      grooming: 'content-cut',
+      vet: 'stethoscope',
+      training: 'school-outline',
+      boarding: 'home-outline',
+      walking: 'walk',
     };
     return icons[type];
   };
@@ -141,7 +142,7 @@ export function ServicesScreen() {
       >
         {filteredServices.length === 0 ? (
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyIcon}>🔍</Text>
+            <MaterialCommunityIcons style={styles.emptyIcon} name="magnify" size={64} color={COLORS.textSecondary} />
             <Text style={styles.emptyText}>No services found</Text>
             <Text style={styles.emptySubtext}>
               Try adjusting your filters or check back later
@@ -151,9 +152,7 @@ export function ServicesScreen() {
           filteredServices.map((service) => (
             <View key={service.id} style={styles.serviceCard}>
               <View style={styles.serviceImageContainer}>
-                <Text style={styles.serviceImage}>
-                  {getServiceIcon(service.type)}
-                </Text>
+                <MaterialCommunityIcons name={getServiceIcon(service.type)} size={30} color={COLORS.primary} />
               </View>
 
               <View style={styles.serviceContent}>
@@ -169,13 +168,13 @@ export function ServicesScreen() {
 
                 <View style={styles.serviceDetails}>
                   <View style={styles.detailItem}>
-                    <Text style={styles.detailIcon}>⏱️</Text>
+                    <MaterialCommunityIcons name="clock-outline" size={14} color={COLORS.textSecondary} />
                     <Text style={styles.detailText}>
                       {service.duration} min
                     </Text>
                   </View>
                   <View style={styles.detailItem}>
-                    <Text style={styles.detailIcon}>⭐</Text>
+                    <MaterialCommunityIcons name="star" size={14} color={COLORS.warning} />
                     <Text style={styles.detailText}>
                       {service.rating} ({service.reviews} reviews)
                     </Text>
@@ -420,9 +419,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  serviceImage: {
-    fontSize: 32,
-  },
   serviceContent: {
     flex: 1,
   },
@@ -450,9 +446,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-  },
-  detailIcon: {
-    fontSize: 12,
   },
   detailText: {
     fontSize: 11,

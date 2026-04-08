@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Button from '../../components/common/Button';
 import {COLORS, FONT_SIZE, FONT_WEIGHT, RADIUS, SHADOW, SPACING} from '../../constants/theme';
 import {setUser} from '../../store/slices/authSlice';
@@ -76,7 +77,7 @@ const OTPScreen: React.FC<OTPScreenProps> = ({navigation, route}) => {
         role: 'buyer',
       }),
     );
-    dispatch(showToast({message: 'welcome to zooria! 🐾', type: 'success'}));
+    dispatch(showToast({message: 'welcome to zooria!', type: 'success'}));
   };
 
   const handleResend = () => {
@@ -100,11 +101,11 @@ const OTPScreen: React.FC<OTPScreenProps> = ({navigation, route}) => {
 
         {/* Emoji circle */}
         <View style={styles.emojiCircle}>
-          <Text style={styles.phoneEmoji}>📱</Text>
+          <MaterialCommunityIcons style={styles.phoneEmoji} name="cellphone" size={36} color={COLORS.textPrimary} />
         </View>
 
         {/* Heading */}
-        <Text style={styles.heading}>{'check your\nphone 📲'}</Text>
+        <Text style={styles.heading}>{'check your\nphone'}</Text>
         <Text style={styles.phoneNumber}>+91 {maskedPhone}</Text>
 
         {/* OTP Boxes */}

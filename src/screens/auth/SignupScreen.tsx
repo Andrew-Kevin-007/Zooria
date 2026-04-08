@@ -8,6 +8,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
 import GlassCard from '../../components/common/GlassCard';
@@ -46,7 +47,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({navigation}) => {
         </TouchableOpacity>
 
         {/* Heading */}
-        <Text style={styles.heading}>join the pack 🐾</Text>
+        <Text style={styles.heading}>join the pack</Text>
 
         {/* Role selector */}
         <View style={styles.roleRow}>
@@ -56,7 +57,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({navigation}) => {
               styles.roleCard,
               role === 'buyer' && styles.roleCardActive,
             ]}>
-            <Text style={styles.roleEmoji}>🛒</Text>
+            <MaterialCommunityIcons style={styles.roleEmoji} name="cart-outline" size={36} color={COLORS.primary} />
             <Text style={styles.roleLabel}>pet owner</Text>
           </GlassCard>
           <View style={styles.roleGap} />
@@ -66,7 +67,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({navigation}) => {
               styles.roleCard,
               role === 'seller' && styles.roleCardActive,
             ]}>
-            <Text style={styles.roleEmoji}>🏪</Text>
+            <MaterialCommunityIcons style={styles.roleEmoji} name="storefront-outline" size={36} color={COLORS.primary} />
             <Text style={styles.roleLabel}>seller / shop</Text>
           </GlassCard>
         </View>

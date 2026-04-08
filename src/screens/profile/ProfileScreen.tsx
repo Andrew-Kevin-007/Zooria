@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {LinearGradient} from 'expo-linear-gradient';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import Avatar from '../../components/common/Avatar';
 import GlassCard from '../../components/common/GlassCard';
 import Badge from '../../components/common/Badge';
@@ -21,16 +22,16 @@ interface ProfileScreenProps {
 }
 
 const MOCK_PETS = [
-  {id: '1', emoji: '🐕', name: 'Max', breed: 'Golden Retriever'},
-  {id: '2', emoji: '🐈', name: 'Luna', breed: 'Persian'},
+  {id: '1', icon: 'dog', name: 'Max', breed: 'Golden Retriever'},
+  {id: '2', icon: 'cat', name: 'Luna', breed: 'Persian'},
 ];
 
 const MENU_ITEMS = [
-  {icon: '📦', label: 'my orders', screen: 'Orders', gradient: COLORS.gradientPrimary},
-  {icon: '📅', label: 'my bookings', screen: 'Bookings', gradient: COLORS.gradientAccent},
-  {icon: '❤️', label: 'saved items', screen: 'Saved', gradient: COLORS.gradientPurple},
-  {icon: '✏️', label: 'edit profile', screen: 'EditProfile', gradient: COLORS.gradientPrimary},
-  {icon: '⚙️', label: 'settings', screen: 'Settings', gradient: COLORS.gradientPurple},
+  {icon: 'package-variant-closed', label: 'my orders', screen: 'Orders', gradient: COLORS.gradientPrimary},
+  {icon: 'calendar-month-outline', label: 'my bookings', screen: 'Bookings', gradient: COLORS.gradientAccent},
+  {icon: 'heart-outline', label: 'saved items', screen: 'Saved', gradient: COLORS.gradientPurple},
+  {icon: 'pencil-outline', label: 'edit profile', screen: 'EditProfile', gradient: COLORS.gradientPrimary},
+  {icon: 'cog-outline', label: 'settings', screen: 'Settings', gradient: COLORS.gradientPurple},
 ];
 
 const ProfileScreen: React.FC<ProfileScreenProps> = ({navigation}) => {
@@ -79,10 +80,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({navigation}) => {
 
       {/* My Pets section */}
       <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>my pets 🐾</Text>
+        <Text style={styles.sectionTitle}>my pets</Text>
       </View>
       <FlatList
-        data={[...MOCK_PETS, {id: 'add', emoji: '➕', name: 'add pet', breed: ''}]}
+        data={[...MOCK_PETS, {id: 'add', icon: 'plus-circle-outline', name: 'add pet', breed: ''}]}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.petsScroll}
@@ -94,7 +95,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({navigation}) => {
                 style={styles.addPetCard}
                 onPress={() => navigation.navigate('PetProfile')}
                 activeOpacity={0.7}>
-                <Text style={styles.addPetEmoji}>➕</Text>
+                <MaterialCommunityIcons style={styles.addPetEmoji} name="plus-circle-outline" size={32} color={COLORS.textMuted} />
                 <Text style={styles.addPetText}>add pet</Text>
               </TouchableOpacity>
             );
@@ -103,7 +104,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({navigation}) => {
             <GlassCard
               style={styles.petCard}
               onPress={() => navigation.navigate('PetProfile', {pet: item})}>
-              <Text style={styles.petEmoji}>{item.emoji}</Text>
+              <MaterialCommunityIcons style={styles.petEmoji} name={item.icon as any} size={40} color={COLORS.primary} />
               <Text style={styles.petName}>{item.name}</Text>
               <Badge label={item.breed} variant="glass" style={styles.breedBadge} />
             </GlassCard>
@@ -121,7 +122,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({navigation}) => {
             <LinearGradient
               colors={[...item.gradient]}
               style={styles.menuIcon}>
-              <Text style={styles.menuIconText}>{item.icon}</Text>
+              <MaterialCommunityIcons style={styles.menuIconText} name={item.icon as any} size={18} color={COLORS.white} />
             </LinearGradient>
             <Text style={styles.menuLabel}>{item.label}</Text>
             {item.label === 'seller dashboard' && (
@@ -137,7 +138,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({navigation}) => {
             <LinearGradient
               colors={[...COLORS.gradientPrimary]}
               style={styles.menuIcon}>
-              <Text style={styles.menuIconText}>🏪</Text>
+              <MaterialCommunityIcons style={styles.menuIconText} name="storefront-outline" size={18} color={COLORS.white} />
             </LinearGradient>
             <Text style={styles.menuLabel}>seller dashboard</Text>
             <Badge label="seller" variant="green" />
@@ -148,7 +149,7 @@ const ProfileScreen: React.FC<ProfileScreenProps> = ({navigation}) => {
         {/* Sign out */}
         <GlassCard style={styles.menuCard} onPress={handleLogout}>
           <View style={styles.logoutIcon}>
-            <Text style={styles.menuIconText}>🚪</Text>
+            <MaterialCommunityIcons style={styles.menuIconText} name="logout" size={18} color={COLORS.hotPink} />
           </View>
           <Text style={styles.logoutLabel}>sign out</Text>
           <Text style={styles.chevron}>›</Text>

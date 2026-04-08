@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 🔥 Firebase Web Config
+// Firebase Web Config
 // Uses environment variables for security. Copy .env.example to .env and fill in values
 // Go to: console.firebase.google.com → Your Project → Project Settings → Web App
 // ─────────────────────────────────────────────────────────────────────────────

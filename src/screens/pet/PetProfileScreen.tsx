@@ -9,21 +9,22 @@ import {
 } from 'react-native';
 import { Text } from 'react-native';
 import { Image } from 'expo-image';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Pet } from '../../types';
 
-const PET_CATEGORY_ICON: Record<Pet['category'], string> = {
-  dog: '🐶',
-  cat: '🐱',
-  bird: '🐦',
-  fish: '🐠',
-  rabbit: '🐰',
-  reptile: '🦎',
-  other: '🐾',
+const PET_CATEGORY_ICON: Record<Pet['category'], keyof typeof MaterialCommunityIcons.glyphMap> = {
+  dog: 'dog',
+  cat: 'cat',
+  bird: 'bird',
+  fish: 'fish',
+  rabbit: 'rabbit',
+  reptile: 'snake',
+  other: 'paw',
 };
 
-const getPetCategoryIcon = (category: Pet['category']) => PET_CATEGORY_ICON[category] ?? '🐾';
+const getPetCategoryIcon = (category: Pet['category']) => PET_CATEGORY_ICON[category] ?? 'paw';
 
 const formatCategory = (category: Pet['category']) =>
   category.charAt(0).toUpperCase() + category.slice(1);
@@ -75,7 +76,7 @@ export function PetProfileScreen() {
       {/* Pet List */}
       {pets.length === 0 ? (
         <View style={styles.emptyContainer}>
-          <Text style={styles.emptyIcon}>🐕</Text>
+          <MaterialCommunityIcons style={styles.emptyIcon} name="dog" size={64} color={COLORS.textSecondary} />
           <Text style={styles.emptyText}>No pets added yet</Text>
           <Text style={styles.emptySubtext}>Add your first pet to get started</Text>
           <TouchableOpacity style={styles.emptyButton}>
@@ -101,7 +102,12 @@ export function PetProfileScreen() {
                 {pet.avatar ? (
                   <Image source={pet.avatar} style={styles.petPillAvatarImage} contentFit="cover" />
                 ) : (
-                  <Text style={styles.petPillAvatar}>{getPetCategoryIcon(pet.category)}</Text>
+                  <MaterialCommunityIcons
+                    style={styles.petPillAvatar}
+                    name={getPetCategoryIcon(pet.category)}
+                    size={28}
+                    color={COLORS.primary}
+                  />
                 )}
                 <Text
                   style={[
@@ -124,7 +130,7 @@ export function PetProfileScreen() {
                   {selectedPet.avatar ? (
                     <Image source={selectedPet.avatar} style={styles.petImageLargeImage} contentFit="cover" />
                   ) : (
-                    <Text style={styles.petImageText}>{getPetCategoryIcon(selectedPet.category)}</Text>
+                    <MaterialCommunityIcons name={getPetCategoryIcon(selectedPet.category)} size={40} color={COLORS.primary} />
                   )}
                 </View>
                 <View style={styles.petHeaderInfo}>
@@ -136,7 +142,7 @@ export function PetProfileScreen() {
                   </Text>
                 </View>
                 <TouchableOpacity style={styles.editButton}>
-                  <Text style={styles.editIcon}>✏️</Text>
+                  <MaterialCommunityIcons name="pencil-outline" size={18} color={COLORS.primary} />
                 </TouchableOpacity>
               </View>
 
@@ -153,7 +159,7 @@ export function PetProfileScreen() {
                 <View style={styles.infoBox}>
                   <Text style={styles.infoLabel}>Vaccinated</Text>
                   <Text style={styles.infoValue}>
-                    {selectedPet.vaccinated ? '✅ Yes' : '❌ No'}
+                    {selectedPet.vaccinated ? 'Yes' : 'No'}
                   </Text>
                 </View>
               </View>
@@ -184,11 +190,11 @@ export function PetProfileScreen() {
               {/* Actions */}
               <View style={styles.actionsSection}>
                 <TouchableOpacity style={styles.actionButtonPrimary}>
-                  <Text style={styles.actionButtonIcon}>📋</Text>
+                  <MaterialCommunityIcons style={styles.actionButtonIcon} name="clipboard-text-outline" size={18} color={COLORS.white} />
                   <Text style={styles.actionButtonText}>View Health Records</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.actionButtonSecondary}>
-                  <Text style={styles.actionButtonIcon}>✏️</Text>
+                  <MaterialCommunityIcons style={styles.actionButtonIcon} name="pencil-outline" size={18} color={COLORS.textPrimary} />
                   <Text style={styles.actionButtonText}>Edit Information</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -204,7 +210,7 @@ export function PetProfileScreen() {
                     ])
                   }
                 >
-                  <Text style={styles.actionButtonIcon}>🗑️</Text>
+                  <MaterialCommunityIcons style={styles.actionButtonIcon} name="trash-can-outline" size={18} color={COLORS.textPrimary} />
                   <Text style={styles.actionButtonText}>Remove Pet</Text>
                 </TouchableOpacity>
               </View>
@@ -385,9 +391,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  editIcon: {
-    fontSize: 18,
   },
   infoGrid: {
     flexDirection: 'row',

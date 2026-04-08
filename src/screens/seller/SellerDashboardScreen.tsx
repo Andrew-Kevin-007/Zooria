@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Text } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Product, Order } from '../../types';
@@ -55,11 +56,11 @@ export function SellerDashboardScreen() {
       {/* Header */}
       <View style={styles.header}>
         <View>
-          <Text style={styles.greeting}>Welcome Back! 👋</Text>
+          <Text style={styles.greeting}>Welcome Back!</Text>
           <Text style={styles.shopName}>PetCare Store</Text>
         </View>
         <TouchableOpacity style={styles.settingsButton}>
-          <Text style={styles.settingsIcon}>⚙️</Text>
+          <MaterialCommunityIcons style={styles.settingsIcon} name="cog-outline" size={20} color={COLORS.textPrimary} />
         </TouchableOpacity>
       </View>
 
@@ -68,22 +69,22 @@ export function SellerDashboardScreen() {
         <>
           <View style={styles.statsGrid}>
             <View style={styles.statCard}>
-              <Text style={styles.statIcon}>💰</Text>
+              <MaterialCommunityIcons style={styles.statIcon} name="cash-multiple" size={28} color={COLORS.primary} />
               <Text style={styles.statValue}>${stats.totalRevenue.toLocaleString()}</Text>
               <Text style={styles.statLabel}>Total Revenue</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={styles.statIcon}>📦</Text>
+              <MaterialCommunityIcons style={styles.statIcon} name="package-variant-closed" size={28} color={COLORS.primary} />
               <Text style={styles.statValue}>{stats.totalSales}</Text>
               <Text style={styles.statLabel}>Total Sales</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={styles.statIcon}>⭐</Text>
+              <MaterialCommunityIcons style={styles.statIcon} name="star" size={28} color={COLORS.warning} />
               <Text style={styles.statValue}>{stats.avgRating}</Text>
               <Text style={styles.statLabel}>Avg Rating</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={styles.statIcon}>📋</Text>
+              <MaterialCommunityIcons style={styles.statIcon} name="clipboard-list-outline" size={28} color={COLORS.primary} />
               <Text style={styles.statValue}>{stats.totalProducts}</Text>
               <Text style={styles.statLabel}>Products</Text>
             </View>
@@ -94,19 +95,19 @@ export function SellerDashboardScreen() {
             <Text style={styles.sectionTitle}>Quick Actions</Text>
             <View style={styles.actionsGrid}>
               <TouchableOpacity style={styles.actionCard}>
-                <Text style={styles.actionIcon}>➕</Text>
+                <MaterialCommunityIcons style={styles.actionIcon} name="plus-circle-outline" size={24} color={COLORS.primary} />
                 <Text style={styles.actionText}>Add Product</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.actionCard}>
-                <Text style={styles.actionIcon}>📊</Text>
+                <MaterialCommunityIcons style={styles.actionIcon} name="chart-line" size={24} color={COLORS.primary} />
                 <Text style={styles.actionText}>View Analytics</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.actionCard}>
-                <Text style={styles.actionIcon}>📝</Text>
+                <MaterialCommunityIcons style={styles.actionIcon} name="clipboard-text-outline" size={24} color={COLORS.primary} />
                 <Text style={styles.actionText}>Manage Orders</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.actionCard}>
-                <Text style={styles.actionIcon}>⭐</Text>
+                <MaterialCommunityIcons style={styles.actionIcon} name="star-outline" size={24} color={COLORS.primary} />
                 <Text style={styles.actionText}>Reviews</Text>
               </TouchableOpacity>
             </View>
@@ -123,7 +124,7 @@ export function SellerDashboardScreen() {
 
             {orders.length === 0 ? (
               <View style={styles.emptyState}>
-                <Text style={styles.emptyIcon}>📭</Text>
+                <MaterialCommunityIcons style={styles.emptyIcon} name="inbox-outline" size={40} color={COLORS.textSecondary} />
                 <Text style={styles.emptyText}>No recent orders</Text>
               </View>
             ) : (
@@ -162,14 +163,14 @@ export function SellerDashboardScreen() {
 
             {products.length === 0 ? (
               <View style={styles.emptyState}>
-                <Text style={styles.emptyIcon}>📦</Text>
+                <MaterialCommunityIcons style={styles.emptyIcon} name="package-variant-closed" size={40} color={COLORS.textSecondary} />
                 <Text style={styles.emptyText}>No products yet</Text>
               </View>
             ) : (
               products.map((product) => (
                 <View key={product.id} style={styles.productItem}>
                   <View style={styles.productImageSmall}>
-                    <Text style={styles.productImageText}>📦</Text>
+                    <MaterialCommunityIcons style={styles.productImageText} name="package-variant-closed" size={24} color={COLORS.primary} />
                   </View>
                   <View style={styles.productInfo}>
                     <Text style={styles.productName}>{product.name}</Text>

@@ -8,6 +8,7 @@ import {
   Animated,
   ViewToken,
 } from 'react-native';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {LinearGradient} from 'expo-linear-gradient';
 import Button from '../../components/common/Button';
 import {COLORS, FONT_SIZE, FONT_WEIGHT, RADIUS, SPACING} from '../../constants/theme';
@@ -16,7 +17,7 @@ const {width: SCREEN_W} = Dimensions.get('window');
 
 interface Slide {
   id: string;
-  emoji: string;
+  icon: keyof typeof MaterialCommunityIcons.glyphMap;
   title: string;
   subtitle: string;
   tint: readonly [string, string];
@@ -25,21 +26,21 @@ interface Slide {
 const SLIDES: Slide[] = [
   {
     id: '1',
-    emoji: '🐕',
+    icon: 'dog',
     title: 'find your\nperfect pet',
     subtitle: 'adopt, shop & vibe with your new bestie',
     tint: ['rgba(57,255,126,0.08)', 'rgba(0,201,167,0.04)'],
   },
   {
     id: '2',
-    emoji: '🛍️',
+    icon: 'shopping-outline',
     title: 'shop drops\n& pet fits',
     subtitle: 'drip out your pet with the freshest gear',
     tint: ['rgba(255,77,109,0.08)', 'rgba(255,140,66,0.04)'],
   },
   {
     id: '3',
-    emoji: '✂️',
+    icon: 'content-cut',
     title: 'glow up\nyour pet',
     subtitle: 'grooming, training & more — all in one place',
     tint: ['rgba(155,93,229,0.08)', 'rgba(106,13,173,0.04)'],
@@ -81,7 +82,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({navigation}) => {
     <LinearGradient
       colors={[...item.tint]}
       style={styles.slide}>
-      <Text style={styles.emoji}>{item.emoji}</Text>
+      <MaterialCommunityIcons style={styles.emoji} name={item.icon} size={120} color={COLORS.neonGreen} />
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.subtitle}>{item.subtitle}</Text>
     </LinearGradient>

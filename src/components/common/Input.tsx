@@ -9,6 +9,7 @@ import {
   TextInputProps,
   ViewStyle,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import {COLORS, FONT_SIZE, FONT_WEIGHT, RADIUS, SHADOW, SPACING} from '../../constants/theme';
 
 interface InputProps extends TextInputProps {
@@ -75,7 +76,11 @@ const Input: React.FC<InputProps> = ({
           <TouchableOpacity
             onPress={() => setHidden(prev => !prev)}
             style={styles.eyeButton}>
-            <Text style={styles.eyeIcon}>{hidden ? '👁️' : '🙈'}</Text>
+            <Ionicons
+              name={hidden ? 'eye-off-outline' : 'eye-outline'}
+              size={20}
+              color={COLORS.textSecondary}
+            />
           </TouchableOpacity>
         )}
       </Animated.View>
@@ -125,9 +130,6 @@ const styles = StyleSheet.create({
   },
   eyeButton: {
     paddingLeft: SPACING.sm,
-  },
-  eyeIcon: {
-    fontSize: FONT_SIZE.lg,
   },
   error: {
     color: COLORS.error,

@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {View, Text, StyleSheet, Animated, Easing} from 'react-native';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {COLORS, FONT_SIZE, FONT_WEIGHT, SPACING} from '../../constants/theme';
 
 interface SplashScreenProps {
@@ -75,7 +76,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
       {/* Pulsing paw circle */}
       <Animated.View
         style={[styles.pawCircle, {transform: [{scale: pulseAnim}]}]}>
-        <Text style={styles.pawEmoji}>🐾</Text>
+        <MaterialCommunityIcons style={styles.pawEmoji} name="paw" size={44} color={COLORS.neonGreen} />
       </Animated.View>
 
       {/* App name */}
@@ -86,7 +87,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({navigation}) => {
 
       {/* Tagline */}
       <Animated.Text style={[styles.tagline, {opacity: taglineOpacity}]}>
-        your pet's happy place ✨
+        your pet's happy place
       </Animated.Text>
 
       {/* Loading dots */}

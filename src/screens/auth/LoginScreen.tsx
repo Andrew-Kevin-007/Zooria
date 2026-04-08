@@ -41,7 +41,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({navigation}) => {
         </TouchableOpacity>
 
         {/* Heading */}
-        <Text style={styles.heading}>{"hey, you're\nback 👋"}</Text>
+        <Text style={styles.heading}>{"hey, you're\nback"}</Text>
         <Text style={styles.subtext}>sign into your zooria</Text>
 
         {/* Inputs */}
@@ -86,7 +86,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({navigation}) => {
         {/* Social buttons */}
         <View style={styles.socialRow}>
           <Button
-            label="🔵 google"
+            label="google"
             variant="glass"
             size="md"
             onPress={() => {}}
@@ -94,7 +94,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({navigation}) => {
           />
           <View style={styles.socialGap} />
           <Button
-            label="📲 otp"
+            label="otp"
             variant="glass"
             size="md"
             onPress={() => navigation.navigate('OTP', {phone})}

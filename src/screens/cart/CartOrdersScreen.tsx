@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { Text } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS } from '../../constants/theme';
 import { mockService } from '../../services/mockService';
 import { Order } from '../../types';
@@ -61,15 +62,15 @@ export function CartOrdersScreen() {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'delivered':
-        return '✅';
+        return 'check-circle';
       case 'preparing':
-        return '📦';
+        return 'package-variant-closed';
       case 'pending':
-        return '⏳';
+        return 'clock-outline';
       case 'cancelled':
-        return '❌';
+        return 'close-circle';
       default:
-        return '📋';
+        return 'clipboard-list-outline';
     }
   };
 
@@ -94,21 +95,35 @@ export function CartOrdersScreen() {
           style={[styles.tab, activeTab === 'cart' && styles.tabActive]}
           onPress={() => setActiveTab('cart')}
         >
-          <Text
-            style={[styles.tabText, activeTab === 'cart' && styles.tabTextActive]}
-          >
-            🛒 Cart
-          </Text>
+          <View style={styles.tabLabelRow}>
+            <MaterialCommunityIcons
+              name="cart-outline"
+              size={16}
+              color={activeTab === 'cart' ? COLORS.primary : COLORS.textSecondary}
+            />
+            <Text
+              style={[styles.tabText, activeTab === 'cart' && styles.tabTextActive]}
+            >
+              Cart
+            </Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tab, activeTab === 'orders' && styles.tabActive]}
           onPress={() => setActiveTab('orders')}
         >
-          <Text
-            style={[styles.tabText, activeTab === 'orders' && styles.tabTextActive]}
-          >
-            📦 Orders
-          </Text>
+          <View style={styles.tabLabelRow}>
+            <MaterialCommunityIcons
+              name="package-variant-closed"
+              size={16}
+              color={activeTab === 'orders' ? COLORS.primary : COLORS.textSecondary}
+            />
+            <Text
+              style={[styles.tabText, activeTab === 'orders' && styles.tabTextActive]}
+            >
+              Orders
+            </Text>
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -122,7 +137,7 @@ export function CartOrdersScreen() {
           <>
             {cartItems.length === 0 ? (
               <View style={styles.emptyContainer}>
-                <Text style={styles.emptyIcon}>🛒</Text>
+                <MaterialCommunityIcons style={styles.emptyIcon} name="cart-outline" size={64} color={COLORS.textSecondary} />
                 <Text style={styles.emptyText}>Your cart is empty</Text>
                 <Text style={styles.emptySubtext}>
                   Add items from the shop to get started
@@ -137,7 +152,7 @@ export function CartOrdersScreen() {
                 {cartItems.map((item, index) => (
                   <View key={index} style={styles.cartItem}>
                     <View style={styles.itemImage}>
-                      <Text style={styles.itemImageText}>📦</Text>
+                      <MaterialCommunityIcons name="package-variant-closed" size={26} color={COLORS.primary} />
                     </View>
                     <View style={styles.itemDetails}>
                       <Text style={styles.itemName}>{item.product.name}</Text>
@@ -158,7 +173,7 @@ export function CartOrdersScreen() {
                       </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={styles.removeButton}>
-                      <Text>🗑️</Text>
+                      <MaterialCommunityIcons name="trash-can-outline" size={18} color={COLORS.error} />
                     </TouchableOpacity>
                   </View>
                 ))}
@@ -206,7 +221,7 @@ export function CartOrdersScreen() {
           <>
             {orders.length === 0 ? (
               <View style={styles.emptyContainer}>
-                <Text style={styles.emptyIcon}>📦</Text>
+                <MaterialCommunityIcons style={styles.emptyIcon} name="package-variant-closed" size={64} color={COLORS.textSecondary} />
                 <Text style={styles.emptyText}>No orders yet</Text>
                 <Text style={styles.emptySubtext}>
                   Your orders will appear here once you place them
@@ -230,9 +245,11 @@ export function CartOrdersScreen() {
                         { backgroundColor: getStatusColor(order.status) },
                       ]}
                     >
-                      <Text style={styles.statusIcon}>
-                        {getStatusIcon(order.status)}
-                      </Text>
+                      <MaterialCommunityIcons
+                        name={getStatusIcon(order.status)}
+                        size={12}
+                        color={COLORS.white}
+                      />
                       <Text style={styles.statusText}>
                         {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                       </Text>
@@ -242,7 +259,7 @@ export function CartOrdersScreen() {
                   {/* Order Items */}
                   {order.items.map((item, index) => (
                     <View key={index} style={styles.orderItem}>
-                      <Text style={styles.orderItemIcon}>📦</Text>
+                      <MaterialCommunityIcons style={styles.orderItemIcon} name="package-variant-closed" size={20} color={COLORS.primary} />
                       <View style={styles.orderItemDetails}>
                         <Text style={styles.orderItemName}>
                           {item.product.name}
@@ -317,6 +334,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: COLORS.textSecondary,
   },
+  tabLabelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
   tabTextActive: {
     color: COLORS.primary,
   },
@@ -372,9 +394,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
-  },
-  itemImageText: {
-    fontSize: 28,
   },
   itemDetails: {
     flex: 1,
@@ -509,9 +528,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 6,
-  },
-  statusIcon: {
-    fontSize: 12,
   },
   statusText: {
     fontSize: 12,

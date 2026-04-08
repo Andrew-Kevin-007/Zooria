@@ -9,6 +9,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {useSelector, useDispatch} from 'react-redux';
 import Avatar from '../../components/common/Avatar';
 import Button from '../../components/common/Button';
@@ -35,14 +36,14 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation}) => {
   const [pincode, setPincode] = useState('');
 
   const handleAvatarTap = () => {
-    Alert.alert('coming soon', 'image picker will be available soon ✨');
+    Alert.alert('coming soon', 'image picker will be available soon');
   };
 
   const handleSave = () => {
     if (user) {
       dispatch(setUser({...user, name, email}));
     }
-    dispatch(showToast({message: 'profile updated! ✨', type: 'success'}));
+    dispatch(showToast({message: 'profile updated!', type: 'success'}));
     navigation.goBack();
   };
 
@@ -61,7 +62,7 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation}) => {
           <Text style={styles.backText}>←</Text>
         </TouchableOpacity>
 
-        <Text style={styles.heading}>edit your vibe ✏️</Text>
+        <Text style={styles.heading}>edit your vibe</Text>
 
         {/* Avatar */}
         <TouchableOpacity
@@ -75,7 +76,7 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation}) => {
             ringColor={COLORS.neonGreen}
           />
           <View style={styles.cameraOverlay}>
-            <Text style={styles.cameraEmoji}>📷</Text>
+            <MaterialCommunityIcons style={styles.cameraEmoji} name="camera-outline" size={14} color={COLORS.textPrimary} />
           </View>
         </TouchableOpacity>
 
@@ -100,7 +101,7 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = ({navigation}) => {
 
         {/* Location */}
         <GlassCard style={styles.sectionCard}>
-          <Text style={styles.sectionTitle}>your location 📍</Text>
+          <Text style={styles.sectionTitle}>your location</Text>
           <Input
             label="street"
             placeholder="street address"

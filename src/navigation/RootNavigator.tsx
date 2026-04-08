@@ -1,7 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { HomeScreen } from '../screens/home/HomeScreen';
 import { ExploreScreen } from '../screens/explore/ExploreScreen';
@@ -17,18 +18,22 @@ const Tab = createBottomTabNavigator();
 
 // Custom Tab Bar Icon
 const TabIcon = ({ focused, label }: { focused: boolean; label: string }) => {
-  const iconMap: Record<string, string> = {
-    Home: '🏠',
-    Explore: '🔍',
-    Pets: '🐕',
-    Cart: '🛒',
-    Services: '✨',
-    Seller: '📊',
+  const iconMap: Record<string, keyof typeof MaterialCommunityIcons.glyphMap> = {
+    Home: 'home-outline',
+    Explore: 'magnify',
+    Pets: 'paw-outline',
+    Cart: 'cart-outline',
+    Services: 'star-four-points-outline',
+    Seller: 'chart-line',
   };
 
   return (
     <View style={styles.tabIconContainer}>
-      <Text style={styles.tabIconText}>{iconMap[label] || '📱'}</Text>
+      <MaterialCommunityIcons
+        name={iconMap[label] || 'cellphone'}
+        size={24}
+        color={focused ? COLORS.primary : COLORS.textTertiary}
+      />
       {focused && <View style={styles.tabIndicator} />}
     </View>
   );
@@ -184,9 +189,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 48,
-  },
-  tabIconText: {
-    fontSize: 24,
   },
   tabIndicator: {
     width: 4,
